@@ -1,14 +1,14 @@
 .header {
-  background: #eee url('../../header-bk.png') center;
   background-size: cover;
-  border-bottom: 1px solid #ccc;
+  background-color: #1565C0;
 }
 
 .content {
   width: 100%;
   max-width: 980px;
   margin: auto;
-  padding: 64px 16px;
+  /*padding: 64px 16px;*/
+  padding: 32px 16px;
   overflow: auto;
 }
 
