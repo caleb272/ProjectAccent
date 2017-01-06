@@ -4,6 +4,7 @@ import * as CommentSectionController from '../controllers/CommentSection.control
 const router = new Router()
 
 router.route('/').put(CommentSectionController.getComments)
+router.route('/').post(CommentSectionController.commentOnURL)
 
 
 export default router

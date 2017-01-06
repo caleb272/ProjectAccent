@@ -4,7 +4,7 @@ function Comment(props) {
   const comment = props.comment
   return (
     <div>
-      <h4>{comment.username}</h4>
+      <h4>{comment.comment}</h4>
       <p style={{ marginLeft: '20px' }}>{comment.message}</p>
     </div>
   )
