@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getCommentsRequest, commentOnURLRequest } from './CommentSectionActions'
 import { getComments } from './CommentSectionReducer'
+import WebsiteInputBar from './components/WebsiteInputBar/WebsiteInputBar'
+import CommentInputBar from './components/CommentInputBar/CommentInputBar'
 import Comment from './components/Comment/Comment'
 
 // Import Style
@@ -47,25 +49,15 @@ class CommentSection extends Component {
   render() {
     return (
       <div>
-        <div>
-          <form onSubmit={this.onWebsiteFormSubmit}>
-            <label htmlFor="url-input">WEBSITE:</label>
-            <input
-              type="url"
-              id="url-input"
-            />
-          </form>
-
-          <form onSubmit={this.onCommentFormSubmit}>
-            <label htmlFor="comment-input">Comment:</label>
-            <input
-              type="text"
-              id="comment-input"
-            />
-          </form>
-        </div>
-
-        {this.props.comments.map((comment) => (<Comment comment={comment} key={`${comment.username}${comment.comment}${comment.cuid}`} />))}
+        {
+          this.state.websiteLink.length === 0 ?
+            <WebsiteInputBar onWebsiteFormSubmit={this.onWebsiteFormSubmit} />
+            : <CommentInputBar onCommentFormSubmit={this.onCommentFormSubmit} />
+        }
+        {
+          this.props.comments.map((comment) =>
+            (<Comment comment={comment} key={`${comment.username}${comment.comment}${comment.cuid}`} />))
+        }
       </div>
     )
   }
