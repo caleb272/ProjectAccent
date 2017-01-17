@@ -1,0 +1,15 @@
+.comment {
+
+}
+
+.commentee h8 {
+  color: grey;
+}
+
+.comment > p {
+  border-bottom-color: grey !important;
+  border-bottom: solid 10px;
+  border-bottom-width: thin;
+  margin-left: 40px;
+  margin-right: 40px;
+}

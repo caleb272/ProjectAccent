@@ -2,16 +2,21 @@ import React, { PropTypes } from 'react'
 
 function WebsiteInputBar(props) {
   return (
-    <form onSubmit={props.onWebsiteFormSubmit}>
-      <label htmlFor="url-input">WEBSITE:</label>
-      <input
-        type="url"
-        id="url-input"
-        autoComplete="false"
-        autoCorrect="false"
-        autoFocus="true"
-      />
-    </form>
+    <div className="row">
+      <form
+        onSubmit={props.onWebsiteFormSubmit}
+        className="col s12"
+      >
+        <div className="input-field col s12">
+          <input
+            id="website"
+            type="text"
+            className="validate"
+          />
+          <label htmlFor="website">Website</label>
+        </div>
+      </form>
+    </div>
   )
 }
 

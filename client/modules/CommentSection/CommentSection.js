@@ -7,8 +7,8 @@ import WebsiteInputBar from './components/WebsiteInputBar/WebsiteInputBar'
 import CommentInputBar from './components/CommentInputBar/CommentInputBar'
 import Comment from './components/Comment/Comment'
 
-// Import Style
-// import styles from './CommentSection.css' for some reason this is fucking node over
+// Import Style for some reason this is fucking node over
+// import styles from './CommentSection.css'
 
 class CommentSection extends Component {
   constructor(props) {
@@ -30,7 +30,7 @@ class CommentSection extends Component {
 
   onWebsiteFormSubmit(e) {
     e.preventDefault()
-    const websiteLink = e.target.children[1].value
+    const websiteLink = e.target.children[0].children[0].value
     this.setState({ websiteLink })
     this.props.dispatch(getCommentsRequest(websiteLink))
   }
@@ -39,7 +39,7 @@ class CommentSection extends Component {
   onCommentFormSubmit(e) {
     e.preventDefault()
     const url = this.state.websiteLink
-    const comment = e.target.children[1].value
+    const comment = e.target.children[0].children[0].value
 
     if (url && comment)
       this.props.dispatch(commentOnURLRequest(comment, url))

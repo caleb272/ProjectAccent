@@ -56,8 +56,6 @@ app.use('/static', Express.static(path.resolve(__dirname, '../node_modules')))
 app.use('/api', posts)
 app.use('/api/comments', comments)
 
-console.log(path.resolve(__dirname, '../node_modules'))
-
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {
   const head = Helmet.rewind()
@@ -90,6 +88,8 @@ const renderFullPage = (html, initialState) => {
           window.webpackManifest = ${JSON.stringify(chunkManifest)}
           //]]>` : ''}
         </script>
+        <script type='text/javascript' src='https://code.jquery.com/jquery-2.1.1.min.js'></script>
+        <script src='static/materialize-css/dist/js/materialize.js'></script>
         <script src='${process.env.NODE_ENV === 'production' ? assetsManifest['/vendor.js'] : '/vendor.js'}'></script>
         <script src='${process.env.NODE_ENV === 'production' ? assetsManifest['/app.js'] : '/app.js'}'></script>
       </body>

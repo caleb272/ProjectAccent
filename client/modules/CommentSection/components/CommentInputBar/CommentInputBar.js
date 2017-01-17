@@ -2,15 +2,20 @@ import React, { PropTypes } from 'react';
 
 function CommentInputBar(props) {
   return (
-    <form onSubmit={props.onCommentFormSubmit}>
-      <label htmlFor="comment-input">Comment:</label>
-      <input
-        type="text"
-        id="comment-input"
-        autoComplete="false"
-        autoCorrect="false"
-      />
-    </form>
+    <div className="row">
+      <form onSubmit={props.onCommentFormSubmit} className="col s12">
+        <div className="input-field col s12">
+          <input
+            type="text"
+            id="comment-input"
+            autoComplete="false"
+            autoCorrect="false"
+            className="validate"
+          />
+          <label htmlFor="comment-input" className="active">Comment:</label>
+        </div>
+      </form>
+    </div>
   )
 }
 
