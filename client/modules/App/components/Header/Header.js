@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
+import LoginButton from '../LoginButton/LoginButton'
 
 // Import Style
 import styles from './Header.css';
@@ -10,8 +11,9 @@ export function Header(props, context) {
     <div className={styles.header}>
       <div className={styles.content}>
         <h1 className={styles['site-title']}>
-          <Link to="/" >PROJECT ACCENT</Link>
+          <Link to="/">PROJECT ACCENT</Link>
         </h1>
+        <LoginButton />
       </div>
     </div>
   )
