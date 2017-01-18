@@ -7,7 +7,7 @@ function LoginButton() {
   return (
     <span className={styles['login-button']}>
       <h5>
-        <Link to="/">Login&nbsp;/&nbsp;Register</Link>
+        <Link to="/login">Login&nbsp;/&nbsp;Register</Link>
       </h5>
     </span>
   )
