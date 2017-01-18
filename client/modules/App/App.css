@@ -1,6 +1,7 @@
 .container {
   max-width: 980px;
   width: 100%;
+  min-width: 600px;
   padding: 15px;
   margin: 0 auto;
   color: #FAFAFA;

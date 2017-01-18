@@ -1,13 +1,13 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { Link } from 'react-router'
 
 import styles from './LoginButton.css'
 
-function LoginButton(props, context) {
+function LoginButton() {
   return (
     <span className={styles['login-button']}>
       <h5>
-        <Link to="/">Login</Link>
+        <Link to="/">Login&nbsp;/&nbsp;Register</Link>
       </h5>
     </span>
   )

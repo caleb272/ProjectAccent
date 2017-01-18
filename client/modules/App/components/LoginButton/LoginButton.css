@@ -1,9 +1,6 @@
 .login-button {
-  position: absolute;
-  right: 0px;
-  padding-right: 100px;
-  marign: auto;
-  padding: auto;
+  padding: 32px 16px;
+  text-align: right;
 }
 
 .login-button a {
