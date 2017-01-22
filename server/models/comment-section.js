@@ -8,4 +8,15 @@ const CommentSectionSchema = new Schema({
   cuid: { type: String, required: true }
 })
 
+// a comment looks like this
+/*
+{
+  comment: String,
+  username: String,
+  timestamp: String,
+  cuid: String,
+  userID: String
+}
+*/
+
 export default mongoose.model('CommentSection', CommentSectionSchema)

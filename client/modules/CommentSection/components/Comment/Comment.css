@@ -1,9 +1,6 @@
 .comment {
-
-}
-
-.commentee h8 {
-  color: grey;
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
 .comment > p {

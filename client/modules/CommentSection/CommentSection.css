@@ -1,5 +1,8 @@
-/* CommentSection styles */
+.comment-section {
+  padding-bottom: 30px;
+}
 
-comment {
-  background-color: blue;
+.comment-section .comments {
+  max-width: 980px;
+  margin: 0 auto;
 }

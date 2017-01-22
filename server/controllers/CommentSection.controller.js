@@ -14,16 +14,19 @@ export function getComments(req, res) {
 
 
 export function commentOnURL(req, res) {
+  if (!req.user)
+    return respondWithForddiden(res)
+
   const rawURL = req.body.websiteURL
   const comment = req.body.comment
   if (!comment || !rawURL)
-    return respondWithError(' no websiteURL or comment send to server')
+    return respondWithError(' no websiteURL or comment sent to server')
 
   findOrCreateCommentSectionForURL(parseURL(rawURL))
     .then(commentedURL => {
       console.log(commentedURL)
-      console.log(createComment(comment, 'Caleb Martin'))
-      const commentData = createComment(comment, 'Caleb Martin')
+      console.log(createComment(comment, req.user))
+      const commentData = createComment(comment, req.user)
       commentedURL.comments.push(commentData)
       commentedURL.save()
       // success ? respondWithAccepted(res) : respondWithForddiden(res)
@@ -35,7 +38,8 @@ export function commentOnURL(req, res) {
 
 function parseURL(rawURL) {
   const parsedURL = url.parse(rawURL)
-  return `${parsedURL.host}${parsedURL.path}`
+  console.log(`${parsedURL.hostname}${parsedURL.path}`)
+  return `${parsedURL.hostname}${parsedURL.path}`
 }
 
 
@@ -61,10 +65,11 @@ function createCommentSectionForURL(websiteURL) {
 }
 
 
-function createComment(comment, username) {
+function createComment(comment, { userID, username }) {
   return {
     comment,
     username,
+    userID,
     timestamp: Date.now(),
     cuid: cuid()
   }

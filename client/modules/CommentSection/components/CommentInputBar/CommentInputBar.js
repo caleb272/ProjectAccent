@@ -8,16 +8,18 @@ function CommentInputBar(props) {
           <input
             type="text"
             id="comment-input"
-            autoComplete="false"
-            autoCorrect="false"
+            autoComplete="off"
             className="validate"
+            autoFocus="true"
+            placeholder="Comment:"
           />
-          <label htmlFor="comment-input" className="active">Comment:</label>
         </div>
       </form>
     </div>
   )
 }
+
+// <label htmlFor="comment-input" className="active">Comment:</label>
 
 CommentInputBar.propTypes = {
   onCommentFormSubmit: PropTypes.func.isRequired

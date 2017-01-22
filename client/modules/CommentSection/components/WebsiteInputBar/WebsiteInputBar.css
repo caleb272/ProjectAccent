@@ -1,0 +1,39 @@
+.website-input-bar {
+  padding: 0px;
+  margin: 0px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.website-input-bar div {
+  padding: 0px !important;
+  margin: 0px !important;
+  width: 100%;
+}
+
+.website-input-bar form {
+  margin: 0px !important;
+  padding: 0px !important;
+}
+
+.website-input-bar input {
+  padding-top: 0px;
+  margin: 0px;
+}
+
+.website-input-bar .complete {
+  background-color: #1565C0;
+  font-size: 2em;
+  text-align: center;
+}
+
+/*.website-input-bar input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #212121 inset;
+}*/
+
+.website-input-bar input:-webkit-autofill,
+.website-input-bar input:hover:-webkit-autofill,
+.website-input-bar input:active:-webkit-autofill,
+.website-input-bar input:focus:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #1565C0 inset;
+}

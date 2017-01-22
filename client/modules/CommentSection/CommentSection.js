@@ -8,18 +8,20 @@ import CommentInputBar from './components/CommentInputBar/CommentInputBar'
 import Comment from './components/Comment/Comment'
 
 // Import Style for some reason this is fucking node over
-// import styles from './CommentSection.css'
+import styles from './CommentSection.css'
 
 class CommentSection extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      websiteLink: ''
+      websiteLink: '',
+      showCommentInput: false
     }
 
     this.onWebsiteFormSubmit = this.onWebsiteFormSubmit.bind(this)
     this.onCommentFormSubmit = this.onCommentFormSubmit.bind(this)
+    this.showCommentInput = this.showCommentInput.bind(this)
   }
 
 
@@ -28,11 +30,10 @@ class CommentSection extends Component {
   }
 
 
-  onWebsiteFormSubmit(e) {
-    e.preventDefault()
-    const websiteLink = e.target.children[0].children[0].value
+  onWebsiteFormSubmit(websiteLink) {
     this.setState({ websiteLink })
     this.props.dispatch(getCommentsRequest(websiteLink))
+    this.showCommentInput(true)
   }
 
 
@@ -40,24 +41,41 @@ class CommentSection extends Component {
     e.preventDefault()
     const url = this.state.websiteLink
     const comment = e.target.children[0].children[0].value
+    e.target.children[0].children[0].value = ''
 
     if (url && comment)
       this.props.dispatch(commentOnURLRequest(comment, url))
   }
 
 
+  showCommentInput(showCommentInput) {
+    this.setState({ showCommentInput })
+  }
+
+
+  createComment(comment) {
+    return (
+      <Comment
+        comment={comment}
+        key={`${comment.username}${comment.comment}${comment.cuid}`}
+      />
+    )
+  }
+
+
   render() {
     return (
-      <div>
-        {
-          this.state.websiteLink.length === 0 ?
-            <WebsiteInputBar onWebsiteFormSubmit={this.onWebsiteFormSubmit} />
-            : <CommentInputBar onCommentFormSubmit={this.onCommentFormSubmit} />
-        }
-        {
-          this.props.comments.map((comment) =>
-            (<Comment comment={comment} key={`${comment.username}${comment.comment}${comment.cuid}`} />))
-        }
+      <div className={styles['comment-section']}>
+        <WebsiteInputBar
+          onWebsiteFormSubmit={this.onWebsiteFormSubmit}
+          showCommentInput={this.showCommentInput}
+        />
+        <div className={styles.comments}>
+          {this.state.showCommentInput
+              ? <CommentInputBar onCommentFormSubmit={this.onCommentFormSubmit} /> : null}
+          {this.state.showCommentInput
+              ? this.props.comments.map(this.createComment) : null}
+        </div>
       </div>
     )
   }
