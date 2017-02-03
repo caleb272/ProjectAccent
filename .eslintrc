@@ -30,6 +30,7 @@
      "react/jsx-no-bind": [0],
      "curly": [0],
      "no-console": [0],
-     "import/no-unresolved": [0] // Until import plugin supports webpack 2 resolveModules
+     "react/sort-comp": [0],
+     "import/no-unresolved": [0] // Until import plugin supports webpack 2 resolveModules,
   }
 }

@@ -10,3 +10,12 @@
   margin-left: 40px;
   margin-right: 40px;
 }
+
+.comment button {
+  color: orange;
+  background-color: inherit;
+  margin-left: 10px;
+  font-size: 0.8em;
+  border-radius: 0px;
+  border-width: 0px;
+}

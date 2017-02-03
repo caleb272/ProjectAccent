@@ -14,8 +14,9 @@ const CommentSectionSchema = new Schema({
   comment: String,
   username: String,
   timestamp: String,
-  cuid: String,
-  userID: String
+  userID: String,
+  parentID: String,
+  cuid: String
 }
 */
 

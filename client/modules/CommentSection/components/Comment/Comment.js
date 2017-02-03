@@ -1,11 +1,23 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
+import CommentInputBar from '../CommentInputBar/CommentInputBar'
 
 import styles from './Comment.css'
 
-function Comment(props) {
-  function commentTimeStamp(timestamp) {
+class Comment extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      showCommentInput: false
+    }
+
+    this.toggleShowReplyInput = this.toggleShowReplyInput.bind(this)
+    this.onReply = this.onReply.bind(this)
+  }
+
+
+  commentTimeStamp(timestamp) {
     let timeFormat = 'seconds'
-    // console.log(timestamp)
     const secondsToNow = Math.floor((Date.now() - timestamp) / 1000)
     const minutesToNow = Math.floor(secondsToNow / 60)
     const hoursToNow = Math.floor(minutesToNow / 60)
@@ -25,20 +37,39 @@ function Comment(props) {
     return `about ${time} ${timeFormat} ago`
   }
 
-  const comment = props.comment
-  return (
-    <div className={styles.comment}>
-      <div>
-        <h8>{comment.username}</h8>
-        <span>&nbsp;-&nbsp;{commentTimeStamp(comment.timestamp)}</span>
+
+  toggleShowReplyInput() {
+    this.setState({ showCommentInput: !this.state.showCommentInput })
+  }
+
+
+  onReply(message) {
+    this.toggleShowReplyInput()
+    this.props.submitComment(message, this.props.comment.cuid)
+  }
+
+
+  render() {
+    const comment = this.props.comment
+    return (
+      <div className={styles.comment}>
+        <div>
+          <h8>{comment.username}</h8>
+          <span>&nbsp;-&nbsp;{this.commentTimeStamp(comment.timestamp)}</span>
+          <button onClick={this.toggleShowReplyInput}>reply</button>
+        </div>
+        <p>{comment.comment}</p>
+        {this.state.showCommentInput
+            ? <CommentInputBar onCommentFormSubmit={this.onReply} /> : null}
       </div>
-      <p>{comment.comment}</p>
-    </div>
-  )
+    )
+  }
 }
 
+
 Comment.propTypes = {
-  comment: PropTypes.object.isRequired
+  comment: PropTypes.object.isRequired,
+  submitComment: PropTypes.func.isRequired
 }
 
 export default Comment

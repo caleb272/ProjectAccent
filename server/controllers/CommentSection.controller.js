@@ -19,14 +19,15 @@ export function commentOnURL(req, res) {
 
   const rawURL = req.body.websiteURL
   const comment = req.body.comment
+  const parentID = req.body.parentID
   if (!comment || !rawURL)
     return respondWithError(' no websiteURL or comment sent to server')
 
   findOrCreateCommentSectionForURL(parseURL(rawURL))
     .then(commentedURL => {
       console.log(commentedURL)
-      console.log(createComment(comment, req.user))
-      const commentData = createComment(comment, req.user)
+      console.log(createComment(comment, parentID, req.user))
+      const commentData = createComment(comment, parentID, req.user)
       commentedURL.comments.push(commentData)
       commentedURL.save()
       // success ? respondWithAccepted(res) : respondWithForddiden(res)
@@ -65,12 +66,14 @@ function createCommentSectionForURL(websiteURL) {
 }
 
 
-function createComment(comment, { userID, username }) {
+function createComment(comment, parentID, { userID, username }) {
+  console.log('parentID from createComment:', parentID)
   return {
     comment,
     username,
-    userID,
     timestamp: Date.now(),
+    userID,
+    parentID,
     cuid: cuid()
   }
 }

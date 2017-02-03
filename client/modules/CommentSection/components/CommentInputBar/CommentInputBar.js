@@ -1,9 +1,15 @@
 import React, { PropTypes } from 'react';
 
 function CommentInputBar(props) {
+  function onSubmit(e) {
+    e.preventDefault()
+    props.onCommentFormSubmit(e.target.children[0].children[0].value)
+    e.target.children[0].children[0].value = ''
+  }
+
   return (
     <div className="row">
-      <form onSubmit={props.onCommentFormSubmit} className="col s12">
+      <form onSubmit={onSubmit} className="col s12">
         <div className="input-field col s12">
           <input
             type="text"

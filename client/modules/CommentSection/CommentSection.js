@@ -22,6 +22,7 @@ class CommentSection extends Component {
     this.onWebsiteFormSubmit = this.onWebsiteFormSubmit.bind(this)
     this.onCommentFormSubmit = this.onCommentFormSubmit.bind(this)
     this.showCommentInput = this.showCommentInput.bind(this)
+    this.createComment = this.createComment.bind(this)
   }
 
 
@@ -37,14 +38,10 @@ class CommentSection extends Component {
   }
 
 
-  onCommentFormSubmit(e) {
-    e.preventDefault()
+  onCommentFormSubmit(comment, parentID) {
     const url = this.state.websiteLink
-    const comment = e.target.children[0].children[0].value
-    e.target.children[0].children[0].value = ''
-
     if (url && comment)
-      this.props.dispatch(commentOnURLRequest(comment, url))
+      this.props.dispatch(commentOnURLRequest(comment, url, parentID))
   }
 
 
@@ -57,6 +54,7 @@ class CommentSection extends Component {
     return (
       <Comment
         comment={comment}
+        submitComment={this.onCommentFormSubmit}
         key={`${comment.username}${comment.comment}${comment.cuid}`}
       />
     )

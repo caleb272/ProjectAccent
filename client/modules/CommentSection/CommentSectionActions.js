@@ -13,9 +13,9 @@ export function getCommentsRequest(websiteURL) {
 }
 
 
-export function commentOnURLRequest(comment, websiteURL) {
+export function commentOnURLRequest(comment, websiteURL, parentID) {
   return function dispatchedRequest(dispatch) {
-    return callApi('comments', 'POST', { comment, websiteURL })
+    return callApi('comments', 'POST', { comment, websiteURL, parentID })
       .then(result => {
         console.log('your result: ', result.data)
         dispatch(addComment(result.data))
