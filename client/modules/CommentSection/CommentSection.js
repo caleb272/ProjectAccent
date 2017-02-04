@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+// import { bindActionCreators } from 'redux'
 import { getCommentsRequest, commentOnURLRequest } from './CommentSectionActions'
 import { getComments } from './CommentSectionReducer'
 import WebsiteInputBar from './components/WebsiteInputBar/WebsiteInputBar'
@@ -37,7 +37,7 @@ class CommentSection extends Component {
     this.setState({ websiteLink })
     this.props.dispatch(getCommentsRequest(websiteLink))
     this.showCommentInput(true)
-    this.props.history.push(`/${encodeURIComponent(websiteLink)}`)
+    this.props.history.push(`/form/${encodeURIComponent(websiteLink)}`)
   }
 
 
