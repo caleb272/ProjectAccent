@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react'
-import url from 'url'
+import { isValidURL } from '../../../../util/URLTools'
 
 import style from './WebsiteInputBar.css'
 
@@ -9,17 +9,15 @@ class WebsiteInputBar extends Component {
 
     this.state = {
       inputBarExpanded: false,
-      inputText: '',
+      inputText: props.defaultURL || '',
       lastRequestedURL: ''
     }
 
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleOnSubmit = this.handleOnSubmit.bind(this)
-    this.isValidURL = this.isValidURL.bind(this)
     this.expand = this.expand.bind(this)
     this.contract = this.contract.bind(this)
   }
-
 
   handleInputChange({ target: { value: inputText } }) {
     this.setState({ inputText })
@@ -27,11 +25,11 @@ class WebsiteInputBar extends Component {
 
 
   handleOnSubmit(e) {
-    e.preventDefault()
-    if (!this.isValidURL(this.state.inputText))
+    if (e)
+      e.preventDefault()
+    if (!isValidURL(this.state.inputText))
       return
 
-    console.log(url.parse(this.state.inputText))
     this.props.onWebsiteFormSubmit(this.state.inputText)
     this.setState({ lastRequestedURL: this.state.inputText })
     this.setState({ inputBarExpanded: (this.state.inputText.length > 0) })
@@ -39,17 +37,13 @@ class WebsiteInputBar extends Component {
   }
 
 
-  isValidURL(rawURL) {
-    const parsedURL = url.parse(rawURL)
-    const hasProtocol = Boolean((parsedURL.protocol || '').length)
-    const hasHost = Boolean((parsedURL.host || '').length)
-    return hasProtocol && hasHost
-  }
-
-
   expand() {
-    this.setState({ inputBarExpanded: this.isValidURL(this.state.inputText) })
-    this.props.showCommentInput(this.isValidURL(this.state.inputText))
+    const inputText = this.state.inputText
+    const isInputValid = isValidURL(inputText)
+    this.setState({ inputBarExpanded: isInputValid })
+    this.props.showCommentInput(isInputValid)
+    if (isInputValid && inputText !== this.state.lastRequestedURL)
+      this.handleOnSubmit()
   }
 
 
@@ -92,7 +86,8 @@ class WebsiteInputBar extends Component {
 
 WebsiteInputBar.propTypes = {
   onWebsiteFormSubmit: PropTypes.func.isRequired,
-  showCommentInput: PropTypes.func.isRequired
+  showCommentInput: PropTypes.func.isRequired,
+  defaultURL: PropTypes.string
 }
 
 export default WebsiteInputBar

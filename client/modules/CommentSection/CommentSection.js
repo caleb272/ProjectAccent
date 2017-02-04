@@ -6,6 +6,7 @@ import { getComments } from './CommentSectionReducer'
 import WebsiteInputBar from './components/WebsiteInputBar/WebsiteInputBar'
 import CommentInputBar from './components/CommentInputBar/CommentInputBar'
 import Comment from './components/Comment/Comment'
+import { isValidURL } from '../../util/URLTools'
 
 // Import Style for some reason this is fucking node over
 import styles from './CommentSection.css'
@@ -15,7 +16,7 @@ class CommentSection extends Component {
     super(props)
 
     this.state = {
-      websiteLink: '',
+      websiteLink: props.link,
       showCommentInput: false
     }
 
@@ -27,7 +28,8 @@ class CommentSection extends Component {
 
 
   componentDidMount() {
-    // this.props.dispatch(getCommentsRequest()) // make this get get called with the website url that the website is called with
+    if (this.state.websiteLink)
+      this.onWebsiteFormSubmit(this.state.websiteLink)
   }
 
 
@@ -35,6 +37,7 @@ class CommentSection extends Component {
     this.setState({ websiteLink })
     this.props.dispatch(getCommentsRequest(websiteLink))
     this.showCommentInput(true)
+    this.props.history.push(`/${encodeURIComponent(websiteLink)}`)
   }
 
 
@@ -67,6 +70,7 @@ class CommentSection extends Component {
         <WebsiteInputBar
           onWebsiteFormSubmit={this.onWebsiteFormSubmit}
           showCommentInput={this.showCommentInput}
+          defaultURL={this.props.link}
         />
         <div className={styles.comments}>
           {this.state.showCommentInput
@@ -80,9 +84,10 @@ class CommentSection extends Component {
 }
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
   return {
-    comments: getComments(state)
+    comments: getComments(state),
+    link: (isValidURL(props.params.link) ? props.params.link : null)
   }
 }
 
@@ -93,7 +98,9 @@ const mapDispatchToProps = (dispatch) => {
 
 CommentSection.propTypes = {
   comments: PropTypes.array.isRequired,
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+  link: PropTypes.string
 }
 
 // CommentSection.need = [
