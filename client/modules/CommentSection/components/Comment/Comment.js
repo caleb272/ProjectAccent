@@ -13,6 +13,7 @@ class Comment extends Component {
 
     this.toggleShowReplyInput = this.toggleShowReplyInput.bind(this)
     this.onReply = this.onReply.bind(this)
+    this.createSubComments = this.createSubComments.bind(this)
   }
 
 
@@ -38,14 +39,27 @@ class Comment extends Component {
   }
 
 
-  toggleShowReplyInput() {
-    this.setState({ showCommentInput: !this.state.showCommentInput })
+  toggleShowReplyInput(show) {
+    this.setState({ showCommentInput: (show !== undefined ? show : !this.state.showCommentInput) })
   }
 
 
   onReply(message) {
-    this.toggleShowReplyInput()
+    this.toggleShowReplyInput(false)
     this.props.submitComment(message, this.props.comment.cuid)
+  }
+
+
+  createSubComments() {
+    if (!this.props.comment.hasOwnProperty('children'))
+      return null
+    return this.props.comment.children.map(subComment =>
+      <Comment
+        comment={subComment}
+        submitComment={this.onReply}
+        key={`${subComment.username}${subComment.comment}${subComment.cuid}`}
+      />
+    )
   }
 
 
@@ -59,6 +73,7 @@ class Comment extends Component {
           <button onClick={this.toggleShowReplyInput}>reply</button>
         </div>
         <p>{comment.comment}</p>
+        {this.createSubComments()}
         {this.state.showCommentInput
             ? <CommentInputBar onCommentFormSubmit={this.onReply} /> : null}
       </div>

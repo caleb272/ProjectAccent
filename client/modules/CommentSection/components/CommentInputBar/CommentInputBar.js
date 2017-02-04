@@ -17,7 +17,7 @@ function CommentInputBar(props) {
             autoComplete="off"
             className="validate"
             autoFocus="true"
-            placeholder="Comment:"
+            placeholder="Comment"
           />
         </div>
       </form>
