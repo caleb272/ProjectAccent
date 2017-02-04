@@ -32,7 +32,7 @@ export class App extends Component {
   render() {
     return (
       <div>
-        <div>
+        <div className={styles.application}>
           <Helmet
             title="Project Accent"
             titleTemplate="%s - Chat For The Web"
