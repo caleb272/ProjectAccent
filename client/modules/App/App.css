@@ -1,20 +1,8 @@
-.application {
-  min-height: 100%;
-  position: absolute;
-  width: 100%;
-}
-
 .container {
   /*max-width: 980px;*/
   height: 100%;
   width: 100%;
-  min-width: 600px;
+  min-width: 300px;
   margin: 0 auto;
   color: #FAFAFA;
-  /*flex: 1 0 auto;*/
-  /*flex-basis: fill;
-  flex-grow: 10;
-  flex: 1 0;*/
-
-  padding-bottom: 100px;
 }

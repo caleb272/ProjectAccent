@@ -9,6 +9,7 @@ import Helmet from 'react-helmet'
 import DevTools from './components/DevTools'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
+import Flexbox from 'flexbox-react'
 
 // Import Actions
 import { toggleAddPost } from './AppActions'
@@ -32,7 +33,7 @@ export class App extends Component {
   render() {
     return (
       <div>
-        <div className={styles.application}>
+        <Flexbox flexDirection="column" minHeight="100vh" width="100%" minWidth="300px">
           <Helmet
             title="Project Accent"
             titleTemplate="%s - Chat For The Web"
@@ -48,16 +49,22 @@ export class App extends Component {
               },
             ]}
           />
-          <Header
-            switchLanguage={lang => this.props.dispatch(switchLanguage(lang))}
-            intl={this.props.intl}
-            toggleAddPost={this.toggleAddPostSection}
-          />
-          <div className={styles.container}>
-            {this.props.children}
-          </div>
-          <Footer />
-        </div>
+          <Flexbox element="header" height="200px" width="100%">
+            <Header
+              switchLanguage={lang => this.props.dispatch(switchLanguage(lang))}
+              intl={this.props.intl}
+              toggleAddPost={this.toggleAddPostSection}
+            />
+          </Flexbox>
+          <Flexbox flexGrow={1}>
+            <div className={styles.container}>
+              {this.props.children}
+            </div>
+          </Flexbox>
+          <Flexbox element="footer" height="100px" width="100%">
+            <Footer />
+          </Flexbox>
+        </Flexbox>
       </div>
     );
   }
