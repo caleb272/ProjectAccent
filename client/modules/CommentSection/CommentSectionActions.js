@@ -1,9 +1,8 @@
 import callApi from '../../util/apiCaller'
-// Export Constants
+
 export const SETCOMMENTS = 'SETCOMMENTS'
 export const ADDCOMMENT = 'ADDCOMMENT'
 
-// Export Actions
 export function getCommentsRequest(websiteURL) {
   return function dispatchedRequest(dispatch) {
     return callApi('comments', 'PUT', { websiteURL })

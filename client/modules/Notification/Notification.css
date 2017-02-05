@@ -1,1 +1,15 @@
 /* Notification styles */
+.notification {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.notification .notification-collection {
+  border-color: #424242;
+}
+
+.notification .collection-header,
+.notification .notification-item {
+  background-color: #212121!important;
+  border-color: inherit!important;
+}

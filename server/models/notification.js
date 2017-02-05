@@ -1,8 +1,11 @@
-import mongoose from 'mongoose';
-const Schema = mongoose.Schema;
+import mongoose from 'mongoose'
+const Schema = mongoose.Schema
 
-const notificationSchema = new Schema({
+const NotificationSchema = new Schema({
+  userID: String,
+  commentID: String,
+  commentSectionURL: String,
+  timestamp: String,
+})
 
-});
-
-export default mongoose.model('Notification', notificationSchema);
+export default mongoose.model('Notification', NotificationSchema)

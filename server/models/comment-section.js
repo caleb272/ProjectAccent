@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 
 const CommentSectionSchema = new Schema({
   websiteURL: { type: String, required: true },
-  comments: { type: Array, defualt: [] },
+  comments: { type: Array, default: [] },
   timestamp: { type: Date, default: Date.now },
   cuid: { type: String, required: true }
 })

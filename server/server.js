@@ -33,8 +33,8 @@ import Helmet from 'react-helmet'
 import routes from '../client/routes'
 import { fetchComponentData } from './util/fetchData'
 import auth from './routes/auth.routes'
+import api from './routes/api.routes'
 import posts from './routes/post.routes'
-import comments from './routes/CommentSection.routes'
 import serverConfig from './config'
 
 import connectMongo from 'connect-mongo'
@@ -69,8 +69,8 @@ app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }))
 app.use(Express.static(path.resolve(__dirname, '../dist')))
 app.use('/static', Express.static(path.resolve(__dirname, '../node_modules')))
 app.use(auth)
+app.use('/api', api)
 app.use('/api', posts)
-app.use('/api/comments', comments)
 
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {
@@ -89,10 +89,12 @@ const renderFullPage = (html, initialState) => {
         ${head.meta.toString()}
         ${head.link.toString()}
         ${head.script.toString()}
+        <meta name="mobile-web-app-capable" content="yes">
 
         ${process.env.NODE_ENV === 'production' ? `<link rel='stylesheet' href='${assetsManifest['/app.css']}' />` : ''}
         <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'/>
         <link href='/static/materialize-css/dist/css/materialize.css' rel='stylesheet' type='text/css' />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         <link rel="shortcut icon" href="http://res.cloudinary.com/hashnode/image/upload/v1455629445/static_imgs/mern/mern-favicon-circle-fill.png" type="image/png" />
       </head>
       <body>

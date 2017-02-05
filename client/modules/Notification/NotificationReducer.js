@@ -1,14 +1,21 @@
 // Import Actions
-import {  } from './NotificationActions';
+import { SET_NOTIFICATIONS, DELETE_NOTIFICATION } from './NotificationActions'
 
 // Initial State
-const initialState = {};
+const initialState = []
 
 const NotificationReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_NOTIFICATIONS:
+      return action.notifications
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default NotificationReducer;
+
+export function getNotifications(state) {
+  return state.notifications
+}
+
+export default NotificationReducer
