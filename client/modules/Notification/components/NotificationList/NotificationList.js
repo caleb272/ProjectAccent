@@ -12,6 +12,7 @@ function NotificationList(props) {
       {props.notifications.map(nli =>
         <NotificationListItem
           {...nli}
+          deleteNotification={props.deleteNotification}
           key={`${nli.commentor}${nli.commentID}`}
         />
       )}
@@ -29,6 +30,7 @@ NotificationList.propTypes = {
       commentSectionURL: PropTypes.string.isRequired
     })
   ).isRequired,
+  deleteNotification: PropTypes.func.isRequired,
   children: PropTypes.string
 }
 
