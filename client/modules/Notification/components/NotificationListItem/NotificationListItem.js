@@ -13,7 +13,7 @@ function NotificationListItem(props) {
   return (
     <li className={`collection-item dismissable row ${styles['notification-item']}`}>
       <span className="col s11 m11">
-        {props.commenter} replied &quot;{props.yourComment}&quot; to &quot;{props.comment}&quot; in <a href={linkToComment}>{props.commentSectionURL}</a>
+        {props.commenter} replied &quot;{props.parentComment}&quot; to &quot;{props.comment}&quot; in <a href={linkToComment}>{props.commentSectionURL}</a>
       </span>
       <button className="secondary-content">
         <i
@@ -28,7 +28,7 @@ function NotificationListItem(props) {
 NotificationListItem.propTypes = {
   commenter: PropTypes.string.isRequired,
   comment: PropTypes.string.isRequired,
-  yourComment: PropTypes.string.isRequired,
+  parentComment: PropTypes.string.isRequired,
   commentID: PropTypes.string.isRequired,
   commentSectionURL: PropTypes.string.isRequired,
   deleteNotification: PropTypes.func.isRequired

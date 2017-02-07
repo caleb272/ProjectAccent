@@ -25,7 +25,7 @@ NotificationList.propTypes = {
     PropTypes.shape({
       commenter: PropTypes.string.isRequired,
       comment: PropTypes.string.isRequired,
-      yourComment: PropTypes.string.isRequired,
+      parentComment: PropTypes.string.isRequired,
       commentID: PropTypes.string.isRequired,
       commentSectionURL: PropTypes.string.isRequired
     })

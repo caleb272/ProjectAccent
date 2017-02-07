@@ -1,6 +1,16 @@
 import CommentSection from '../models/comment-section'
+import { createNotification } from './notification.controller'
+import { respondWithError, respondWithForddiden, respondWithData } from '../util/responses'
 import url from 'url'
 import cuid from 'cuid'
+
+const debugUser = {
+  userID: '123456789',
+  twitterID: 'debug',
+  username: 'DebugUser',
+  profileImage: null,
+  provider: 'debug'
+}
 
 export function getComments(req, res) {
   const rawURL = req.body.websiteURL
@@ -14,6 +24,7 @@ export function getComments(req, res) {
 
 
 export function commentOnURL(req, res) {
+  req.user = req.user || debugUser // this is temporary for debug
   if (!req.user)
     return respondWithForddiden(res)
 
@@ -25,12 +36,12 @@ export function commentOnURL(req, res) {
 
   findOrCreateCommentSectionForURL(parseURL(rawURL))
     .then(commentedURL => {
-      console.log(commentedURL)
-      console.log(createComment(comment, parentID, req.user))
       const commentData = createComment(comment, parentID, req.user)
       commentedURL.comments.push(commentData)
       commentedURL.save()
-      // success ? respondWithAccepted(res) : respondWithForddiden(res)
+
+      createNotifications(commentData, commentedURL.comments, commentedURL.websiteURL)
+
       return respondWithData(commentData, res)
     })
     .catch(error => respondWithError(error, res))
@@ -39,7 +50,6 @@ export function commentOnURL(req, res) {
 
 function parseURL(rawURL) {
   const parsedURL = url.parse(rawURL)
-  console.log(`${parsedURL.hostname}${parsedURL.path}`)
   return `${parsedURL.hostname}${parsedURL.path}`
 }
 
@@ -56,7 +66,6 @@ function findCommentSectionForURL(websiteURL) {
 
 
 function createCommentSectionForURL(websiteURL) {
-  console.log('creating a comment section for websiteURL: ', websiteURL)
   const commentSectionSetup = {
     websiteURL,
     cuid: cuid()
@@ -67,7 +76,6 @@ function createCommentSectionForURL(websiteURL) {
 
 
 function createComment(comment, parentID, { userID, username }) {
-  console.log('parentID from createComment:', parentID)
   return {
     comment,
     username,
@@ -79,21 +87,29 @@ function createComment(comment, parentID, { userID, username }) {
 }
 
 
-function respondWithError(error, res) {
-  res.json({ data: null, error: error.message })
+function createNotifications(commentData, urlComments, commentSectionURL) {
+  const peopleToNotify = getPeopleToNotify(commentData, urlComments)
+  for (const userID of peopleToNotify)
+    createNotification(userID, commentData.userID, commentData.cuid, commentSectionURL)
 }
 
 
-function respondWithData(data, res) {
-  res.json({ data, error: null })
+function getPeopleToNotify(commentData, urlComments) {
+  const peopleToNotify = []
+  if (!commentData.parentID)
+    return peopleToNotify
+
+  for (const currentCommentData of urlComments) {
+    if (shouldNotify(currentCommentData, commentData.parentID, commentData.userID, peopleToNotify))
+      peopleToNotify.push(currentCommentData.userID)
+  }
+
+  return peopleToNotify
 }
 
 
-function respondWithAccepted(res) {
-  res.status(202).end()
-}
-
-
-function respondWithForddiden(res) {
-  res.status(403).end()
+function shouldNotify(commentData, parentID, commenterID, peopleToNotify) {
+  return (commentData.parentID === parentID || commentData.cuid === parentID)
+      && commentData.userID !== commenterID
+      && peopleToNotify.indexOf(commentData.userID) === -1
 }
