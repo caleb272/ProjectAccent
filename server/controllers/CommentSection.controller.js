@@ -1,6 +1,6 @@
 import CommentSection from '../models/comment-section'
 import { createNotification } from './notification.controller'
-import { respondWithError, respondWithForddiden, respondWithData } from '../util/responses'
+import { respondWithError, respondWithForbbiden, respondWithData } from '../util/responses'
 import url from 'url'
 import cuid from 'cuid'
 
@@ -26,13 +26,13 @@ export function getComments(req, res) {
 export function commentOnURL(req, res) {
   req.user = req.user || debugUser // this is temporary for debug
   if (!req.user)
-    return respondWithForddiden(res)
+    return respondWithForbbiden(res)
 
   const rawURL = req.body.websiteURL
   const comment = req.body.comment
   const parentID = req.body.parentID
   if (!comment || !rawURL)
-    return respondWithError(' no websiteURL or comment sent to server')
+    return respondWithError('no websiteURL or comment sent to server')
 
   findOrCreateCommentSectionForURL(parseURL(rawURL))
     .then(commentedURL => {

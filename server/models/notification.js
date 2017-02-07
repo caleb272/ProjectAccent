@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 
 const NotificationSchema = new Schema({
   userID: String,
+  commenterID: String,
   commentID: String,
   commentSectionURL: String,
   timestamp: { type: Date, default: Date.now() },

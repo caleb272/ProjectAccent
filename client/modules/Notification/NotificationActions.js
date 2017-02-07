@@ -14,7 +14,8 @@ export function requestGetNotifications() {
 
 export function requestDeleteNotification(commentID) {
   return function dispatchedRequest(dispatch) {
-    return dispatch(deleteNotification(commentID))
+    dispatch(deleteNotification(commentID))
+    return callApi('notification', 'DELETE', { commentID })
   }
 }
 

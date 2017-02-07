@@ -13,7 +13,7 @@ function NotificationListItem(props) {
   return (
     <li className={`collection-item dismissable row ${styles['notification-item']}`}>
       <span className="col s11 m11">
-        {props.commenter} replied &quot;{props.parentComment}&quot; to &quot;{props.comment}&quot; in <a href={linkToComment}>{props.commentSectionURL}</a>
+        {props.commenter} replied &quot;{props.comment}&quot; to &quot;{props.parentComment}&quot; in <a href={linkToComment}>{props.commentSectionURL}</a>
       </span>
       <button className="secondary-content">
         <i

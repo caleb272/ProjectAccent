@@ -1,4 +1,5 @@
 export function respondWithError(error, res) {
+  console.error(error)
   res.json({ data: null, error: error.message })
 }
 
