@@ -40,7 +40,7 @@ class Comment extends Component {
 
 
   toggleShowReplyInput(show) {
-    this.setState({ showCommentInput: (show !== undefined ? show : !this.state.showCommentInput) })
+    this.setState({ showCommentInput: (show !== undefined && typeof show === 'boolean' ? show : !this.state.showCommentInput) })
   }
 
 
@@ -73,9 +73,9 @@ class Comment extends Component {
           <button onClick={this.toggleShowReplyInput}>reply</button>
         </div>
         <p>{comment.comment}</p>
-        {this.createSubComments()}
         {this.state.showCommentInput
-            ? <CommentInputBar onCommentFormSubmit={this.onReply} /> : null}
+          ? <CommentInputBar onCommentFormSubmit={this.onReply} /> : null}
+        {this.createSubComments()}
       </div>
     )
   }
