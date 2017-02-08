@@ -1,0 +1,25 @@
+.login-button {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.login-button a {
+  border-radius: 0px;
+  width: 100%;
+}
+
+.login-button a i {
+  float: left;
+}
+
+.login-button .google:hover {
+  background-color: #DD4B39!important;
+}
+
+.login-button .twitter:hover {
+  background-color: #55ACEE!important;
+}
+
+.login-button .facebook:hover {
+  background-color: #3B5998!important;
+}

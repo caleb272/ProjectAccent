@@ -20,7 +20,7 @@ function AboutPage() {
         <div className="section">
           <h4>Github</h4>
           <p>
-            Yes, we&#39;re on Github check out the main repository <a href="https://github.com/caleb272/ProjectAccent">here</a>
+            Yes, we&#39;re on Github check out the main repository <a href="https://github.com/caleb272/ProjectAccent" target="_blank">here</a>
           </p>
         </div>
       </div>

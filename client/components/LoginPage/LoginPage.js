@@ -1,16 +1,20 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import LoginButton from '../LoginButton/LoginButton'
 
 import styles from './LoginPage.css'
 
 function LoginPage() {
   return (
-    <div className={styles['login-page']}>
-      <a href="/auth/twitter/login">Login With Twitter</a>
+    <div className={`container ${styles['login-page']}`}>
+      <div className="row">
+        <LoginButton provider="twitter" />
+        <LoginButton provider="google" />
+        <LoginButton provider="facebook" />
+      </div>
     </div>
   )
 }
 
-LoginPage.propTypes = {
-}
+LoginPage.propTypes = {}
 
 export default LoginPage
