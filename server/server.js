@@ -67,7 +67,7 @@ app.use(compression())
 app.use(bodyParser.json({ limit: '20mb' }))
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }))
 app.use(Express.static(path.resolve(__dirname, '../dist')))
-app.use('/static', Express.static(path.resolve(__dirname, '../node_modules')))
+app.use('/static/modules', Express.static(path.resolve(__dirname, '../node_modules')))
 app.use(auth)
 app.use('/api', api)
 app.use('/api', posts)
@@ -93,7 +93,7 @@ const renderFullPage = (html, initialState) => {
 
         ${process.env.NODE_ENV === 'production' ? `<link rel='stylesheet' href='${assetsManifest['/app.css']}' />` : ''}
         <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'/>
-        <link href='/static/materialize-css/dist/css/materialize.css' rel='stylesheet' type='text/css' />
+        <link href='/static/modules/materialize-css/dist/css/materialize.css' rel='stylesheet' type='text/css' />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         <link rel="shortcut icon" href="http://res.cloudinary.com/hashnode/image/upload/v1455629445/static_imgs/mern/mern-favicon-circle-fill.png" type="image/png" />
       </head>
@@ -107,7 +107,7 @@ const renderFullPage = (html, initialState) => {
           //]]>` : ''}
         </script>
         <script type='text/javascript' src='https://code.jquery.com/jquery-2.1.1.min.js'></script>
-        <script src='/static/materialize-css/dist/js/materialize.js'></script>
+        <script src='/static/modules/materialize-css/dist/js/materialize.js'></script>
         <script src='${process.env.NODE_ENV === 'production' ? assetsManifest['/vendor.js'] : '/vendor.js'}'></script>
         <script src='${process.env.NODE_ENV === 'production' ? assetsManifest['/app.js'] : '/app.js'}'></script>
       </body>

@@ -37,10 +37,10 @@ export function commentOnURL(req, res) {
   findOrCreateCommentSectionForURL(parseURL(rawURL))
     .then(commentedURL => {
       const commentData = createComment(comment, parentID, req.user)
+      notifyRelevantUsers(commentData, commentedURL.comments, commentedURL.websiteURL)
       commentedURL.comments.push(commentData)
       commentedURL.save()
 
-      createNotifications(commentData, commentedURL.comments, commentedURL.websiteURL)
 
       return respondWithData(commentData, res)
     })
@@ -87,7 +87,7 @@ function createComment(comment, parentID, { userID, username }) {
 }
 
 
-function createNotifications(commentData, urlComments, commentSectionURL) {
+function notifyRelevantUsers(commentData, urlComments, commentSectionURL) {
   const peopleToNotify = getPeopleToNotify(commentData, urlComments)
   for (const userID of peopleToNotify)
     createNotification(userID, commentData.userID, commentData.cuid, commentSectionURL)
