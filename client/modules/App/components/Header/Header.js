@@ -7,23 +7,23 @@ export function Header(props, context) {
   const devStatus = (
     <sup
       style={{ fontSize: '0.5em', position: 'relative', top: '-20px', left: '-2px', color: '#ff3d00' }}
-    >
-      ALPHA
-    </sup>
+    >ALPHA</sup>
   )
 
   return (
-    <nav className="blue darken-3">
-      <div className="nav-wrapper">
-        <a
-          to="/"
-          className="brand-logo left"
-          onClick={home}
-        >ACCENT{devStatus}</a>
-        {!context.router.isActive('login') && !props.user ? <LoginButton /> : null}
-        {props.user ? <LoggedInNav logout={props.logout} /> : null}
-      </div>
-    </nav>
+    <div style={{ width: '100%' }}>
+      <nav id="nav-mobile" className="blue darken-3" data-activates="nav-mobile">
+        <div className="nav-wrapper">
+          <a
+            to="/"
+            className="brand-logo left"
+            onClick={home}
+          >ACCENT{devStatus}</a>
+          {!context.router.isActive('login') && !props.user ? <LoginButton /> : null}
+          {props.user ? <LoggedInNav logout={props.logout} /> : null}
+        </div>
+      </nav>
+    </div>
   )
 }
 

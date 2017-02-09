@@ -82,7 +82,7 @@ const renderFullPage = (html, initialState) => {
   const chunkManifest = process.env.webpackChunkAssets && JSON.parse(process.env.webpackChunkAssets)
 
   return `
-    <!doctype html>
+    <!DOCTYPE html>
     <html>
       <head>
         ${head.base.toString()}
@@ -90,7 +90,7 @@ const renderFullPage = (html, initialState) => {
         ${head.meta.toString()}
         ${head.link.toString()}
         ${head.script.toString()}
-        <meta name="mobile-web-app-capable" content="yes">
+        <link rel="manifest" href="/static/resources/manifest.json"
 
         ${process.env.NODE_ENV === 'production' ? `<link rel='stylesheet' href='${assetsManifest['/app.css']}' />` : ''}
         <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'/>
@@ -114,8 +114,8 @@ const renderFullPage = (html, initialState) => {
         <script src='${process.env.NODE_ENV === 'production' ? assetsManifest['/app.js'] : '/app.js'}'></script>
       </body>
     </html>
-  `;
-};
+  `
+}
 
 const renderError = err => {
   const softTab = '&#32;&#32;&#32;&#32;';

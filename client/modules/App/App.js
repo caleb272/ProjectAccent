@@ -24,8 +24,8 @@ export class App extends Component {
     this.props.requestGetUser()
   }
 
-  // {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
 
+  // {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
   render() {
     return (
       <div>
@@ -43,6 +43,14 @@ export class App extends Component {
                 name: 'viewport',
                 content: 'width=device-width, initial-scale=1',
               },
+              {
+                name: 'mobile-web-app-capable',
+                content: 'yes'
+              },
+              {
+                name: 'theme-color',
+                content: '#1565c0'
+              }
             ]}
           />
           <Flexbox element="header" width="100%">
