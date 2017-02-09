@@ -1,9 +1,8 @@
 import React, { PropTypes } from 'react';
 
 function LoggedInNav(props, context) {
-  const logout = () => console.log('logout here')
-  const settings = () => context.router.replace('/login')
-  const notifications = () => context.router.replace('/login')
+  const settings = () => context.router.replace('/settings')
+  const notifications = () => context.router.replace('/notifications')
 
   return (
     <ul className="right">
@@ -25,7 +24,7 @@ function LoggedInNav(props, context) {
       </li>
       <li>
         <a
-          onClick={logout}
+          onClick={props.logout}
           className="material-icons"
         >
           <i className="fa fa-sign-out" aria-hidden="true"></i>
@@ -36,6 +35,11 @@ function LoggedInNav(props, context) {
 }
 
 LoggedInNav.contextTypes = {
+  router: PropTypes.object.isRequired
+}
+
+LoggedInNav.propTypes = {
+  logout: PropTypes.func.isRequired
 }
 
 export default LoggedInNav

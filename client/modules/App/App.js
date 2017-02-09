@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { requestGetUser } from '../User/UserActions'
+import { requestGetUser, requestLogout } from '../User/UserActions'
 
 // Import Style
 import styles from './App.css'
@@ -48,6 +48,7 @@ export class App extends Component {
           <Flexbox element="header" width="100%">
             <Header
               user={this.props.user}
+              logout={this.props.requestLogout}
             />
           </Flexbox>
           <Flexbox flexGrow={1}>
@@ -70,6 +71,7 @@ App.propTypes = {
   children: PropTypes.object.isRequired,
   routes: PropTypes.array.isRequired,
   requestGetUser: PropTypes.func.isRequired,
+  requestLogout: PropTypes.func.isRequired,
   currentPathname: PropTypes.string.isRequired,
   user: PropTypes.object
 }
@@ -88,7 +90,8 @@ function mapStateToProps(store, context) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    requestGetUser: bindActionCreators(requestGetUser, dispatch)
+    requestGetUser: bindActionCreators(requestGetUser, dispatch),
+    requestLogout: bindActionCreators(requestLogout, dispatch)
   }
 }
 
