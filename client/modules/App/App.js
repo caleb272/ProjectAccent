@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { requestGetUser } from '../User/UserActions'
 
 // Import Style
 import styles from './App.css'
@@ -11,10 +13,6 @@ import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 import Flexbox from 'flexbox-react'
 
-// Import Actions
-import { toggleAddPost } from './AppActions'
-import { switchLanguage } from '../../modules/Intl/IntlActions'
-
 export class App extends Component {
   constructor(props) {
     super(props)
@@ -23,10 +21,7 @@ export class App extends Component {
 
   componentDidMount() {
     this.setState({isMounted: true}) // eslint-disable-line
-  }
-
-  toggleAddPostSection = () => {
-    this.props.dispatch(toggleAddPost())
+    this.props.requestGetUser()
   }
 
   // {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
@@ -51,9 +46,7 @@ export class App extends Component {
           />
           <Flexbox element="header" height="200px" width="100%">
             <Header
-              switchLanguage={lang => this.props.dispatch(switchLanguage(lang))}
-              intl={this.props.intl}
-              toggleAddPost={this.toggleAddPostSection}
+              user={this.props.user}
             />
           </Flexbox>
           <Flexbox flexGrow={1}>
@@ -62,25 +55,43 @@ export class App extends Component {
             </div>
           </Flexbox>
           <Flexbox element="footer" height="100px" width="100%">
-            <Footer />
+            <Footer
+              currentPathname={this.props.currentPathname}
+            />
           </Flexbox>
         </Flexbox>
       </div>
-    );
+    )
   }
 }
 
 App.propTypes = {
   children: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  intl: PropTypes.object.isRequired,
-};
-
-// Retrieve data from store as props
-function mapStateToProps(store) {
-  return {
-    intl: store.intl,
-  };
+  routes: PropTypes.array.isRequired,
+  requestGetUser: PropTypes.func.isRequired,
+  currentPathname: PropTypes.string.isRequired,
+  user: PropTypes.object
 }
 
-export default connect(mapStateToProps)(App)
+App.contextTypes = {
+  router: PropTypes.object.isRequired
+}
+
+function mapStateToProps(store, context) {
+  return {
+    currentPathname: context.location.pathname,
+    user: store.user
+  }
+}
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+    requestGetUser: bindActionCreators(requestGetUser, dispatch)
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App)

@@ -3,8 +3,8 @@ import React, { PropTypes } from 'react'
 // Import Style
 import styles from './Footer.css'
 
-export function Footer(props, context) {
-  const baseURL = `http://192.168.1.7:8000${context.location.pathname}`
+export function Footer(props) {
+  const baseURL = `http://192.168.1.7:8000${props.currentPathname}`
   const facebook = `http://www.facebook.com/sharer.php?u=${baseURL}`
   const googlePlus = `https://plus.google.com/share?url=${baseURL}`
   const twitter = `https://twitter.com/share?url=${baseURL}`
@@ -49,8 +49,8 @@ export function Footer(props, context) {
   )
 }
 
-Footer.contextTypes = {
-  location: PropTypes.object.isRequired
+Footer.propTypes = {
+  currentPathname: PropTypes.string.isRequired
 }
 
 export default Footer

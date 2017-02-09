@@ -149,7 +149,7 @@ app.use((req, res, next) => {
               <RouterContext {...renderProps} />
             </IntlWrapper>
           </Provider>
-        );
+        )
         const finalState = store.getState()
 
         res

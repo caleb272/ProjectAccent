@@ -9,6 +9,7 @@ import posts from './modules/Post/PostReducer'
 import intl from './modules/Intl/IntlReducer'
 import comments from './modules/CommentSection/CommentSectionReducer'
 import notifications from './modules/Notification/NotificationReducer'
+import user from './modules/User/UserReducer'
 
 // Combine all reducers into one root reducer
 export default combineReducers({
@@ -16,5 +17,6 @@ export default combineReducers({
   posts,
   intl,
   comments,
-  notifications
+  notifications,
+  user
 })

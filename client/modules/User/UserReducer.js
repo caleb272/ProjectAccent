@@ -1,14 +1,14 @@
-// Import Actions
-import {  } from './UserActions';
+import { SET_USER } from './UserActions'
 
-// Initial State
-const initialState = {};
+const initialState = null
 
 const UserReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_USER:
+      return action.user
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default UserReducer;
+export default UserReducer

@@ -12,7 +12,7 @@ export function Header(props, context) {
         <h1 className={styles['site-title']}>
           <Link to="/">PROJECT ACCENT</Link>
         </h1>
-        {!context.router.isActive('login') ? <LoginButton /> : null}
+        {!context.router.isActive('login') && !props.user ? <LoginButton /> : null}
       </div>
     </div>
   )
@@ -23,9 +23,7 @@ Header.contextTypes = {
 }
 
 Header.propTypes = {
-  toggleAddPost: PropTypes.func.isRequired,
-  switchLanguage: PropTypes.func.isRequired,
-  intl: PropTypes.object.isRequired,
+  user: PropTypes.object
 }
 
 export default Header

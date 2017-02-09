@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-// import { bindActionCreators } from 'redux'
+import { bindActionCreators } from 'redux'
 import { getCommentsRequest, commentOnURLRequest } from './CommentSectionActions'
 import { getComments } from './CommentSectionReducer'
 import WebsiteInputBar from './components/WebsiteInputBar/WebsiteInputBar'
@@ -84,9 +84,9 @@ class CommentSection extends Component {
 }
 
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (store, props) => {
   return {
-    comments: getComments(state),
+    comments: getComments(store),
     link: (isValidURL(props.params.link) ? props.params.link : null)
   }
 }

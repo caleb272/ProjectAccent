@@ -1,5 +1,6 @@
-import User from '../models/user';
+import User from '../models/user'
+import { respondWithData } from '../util/responses'
 
-export function getSomething(req, res) {
-  return res.status(200).end();
+export function getUser(req, res) {
+  respondWithData(req.user, res)
 }
