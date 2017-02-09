@@ -10,7 +10,7 @@ function LoginButton({ provider }) {
         href={`/auth/${provider}/login`}
       >
         <i
-          className={`fa fa-${provider}`}
+          className={`fa fa-fw fa-${provider}`}
           aria-hidden="true"
         />
         &nbsp;{`login with ${provider}`}

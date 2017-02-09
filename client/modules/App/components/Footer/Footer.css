@@ -1,18 +1,28 @@
 .footer {
   width: 100%;
   height: 100px;
-  text-align: center;
   background-color: #1565C0;
+  color: #FFF;
+  text-align: center;
+  padding-top: 10px;
 }
 
-.footer p{
-  margin: 0 0 8px 0;
-  font-size: 14px;
-  color: #FFF;
+.footer p {
+  margin-top: 8px;
 }
 
-.footer a{
-  color: #FFF;
-  text-decoration: none;
-  font-weight: 700;
+.footer a {
+  color: white;
+}
+
+.footer .google i:first-child {
+  color: #DD4B39;
+}
+
+.footer .facebook i:first-child {
+  color: #3B5998;
+}
+
+.footer .twitter i:first-child {
+  color: #55ACEE;
 }

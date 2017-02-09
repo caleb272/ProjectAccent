@@ -1,16 +1,56 @@
-import React from 'react'
-import { FormattedMessage } from 'react-intl'
+import React, { PropTypes } from 'react'
 
 // Import Style
 import styles from './Footer.css'
 
-export function Footer() {
+export function Footer(props, context) {
+  const baseURL = `http://192.168.1.7:8000${context.location.pathname}`
+  const facebook = `http://www.facebook.com/sharer.php?u=${baseURL}`
+  const googlePlus = `https://plus.google.com/share?url=${baseURL}`
+  const twitter = `https://twitter.com/share?url=${baseURL}`
+
   return (
     <div className={styles.footer}>
-      <p>&copy; 2016 &middot; Hashnode &middot; LinearBytes Inc.</p>
-      <p><FormattedMessage id="twitterMessage" /> : <a href="https://twitter.com/@mern_io" target="_Blank">@mern_io</a></p>
+      <div className="row">
+        <div className="col s12 m4 l4 offset-m4 offset-l4">
+          <p>&copy; 2017 &middot; Caleb Martin</p>
+        </div>
+
+        <div className={`col s12 m4 l4 ${styles['share-buttons']}`}>
+          <a
+            className={`fa-stack fa-lg ${styles.google}`}
+            href={googlePlus}
+            target="_blank"
+          >
+            <i className="fa fa-square fa-stack-2x" />
+            <i className="fa fa-google fa-stack-1x" />
+          </a>
+
+          <a
+            className={`fa-stack fa-lg ${styles.facebook}`}
+            href={facebook}
+            target="_blank"
+          >
+            <i className="fa fa-square fa-stack-2x" />
+            <i className="fa fa-facebook fa-stack-1x" />
+          </a>
+
+          <a
+            className={`fa-stack fa-lg ${styles.twitter}`}
+            href={twitter}
+            target="_blank"
+          >
+            <i className="fa fa-square fa-stack-2x" />
+            <i className="fa fa-twitter fa-stack-1x" />
+          </a>
+        </div>
+      </div>
     </div>
   )
+}
+
+Footer.contextTypes = {
+  location: PropTypes.object.isRequired
 }
 
 export default Footer
