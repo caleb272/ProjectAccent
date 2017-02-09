@@ -25,6 +25,7 @@ export class App extends Component {
   }
 
   // {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
+
   render() {
     return (
       <div>
@@ -44,7 +45,7 @@ export class App extends Component {
               },
             ]}
           />
-          <Flexbox element="header" height="200px" width="100%">
+          <Flexbox element="header" width="100%">
             <Header
               user={this.props.user}
             />

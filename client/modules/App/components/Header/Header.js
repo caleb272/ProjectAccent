@@ -1,25 +1,28 @@
 import React, { PropTypes } from 'react'
-import { Link } from 'react-router'
 import LoginButton from '../LoginButton/LoginButton'
-
-// Import Style
-import styles from './Header.css'
+import LoggedInNav from '../LoggedInNav/LoggedInNav'
 
 export function Header(props, context) {
+  function home() {
+    context.router.replace('/')
+  }
+
   return (
-    <div className={styles.header}>
-      <div className={styles.content}>
-        <h1 className={styles['site-title']}>
-          <Link to="/">PROJECT ACCENT</Link>
-        </h1>
-        {!context.router.isActive('login') && !props.user ? <LoginButton /> : null}
+    <nav className="blue darken-3">
+      <div className="nav-wrapper">
+        <a
+          to="/"
+          className="brand-logo left"
+          onClick={home}
+        >ACCENT</a>
+        {!context.router.isActive('login') && !props.user ? <LoginButton /> : <LoggedInNav />}
       </div>
-    </div>
+    </nav>
   )
 }
 
 Header.contextTypes = {
-  router: React.PropTypes.object,
+  router: React.PropTypes.object
 }
 
 Header.propTypes = {

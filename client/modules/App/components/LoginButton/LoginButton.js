@@ -1,18 +1,21 @@
 import React from 'react'
-import { Link } from 'react-router'
 
-import styles from './LoginButton.css'
+function LoginButton(props, context) {
+  const login = () => context.router.replace('/login')
 
-function LoginButton() {
   return (
-    <span className={styles['login-button']}>
-      <h5>
-        <Link to="/login">Login&nbsp;/&nbsp;Register</Link>
-      </h5>
-    </span>
+    <ul className="right">
+      <li>
+        <a onClick={login}>
+          <i className="fa fa-2x fa-sign-in" aria-hidden="true"></i>
+        </a>
+      </li>
+    </ul>
   )
 }
 
-LoginButton.propTypes = {}
+LoginButton.contextTypes = {
+  router: React.PropTypes.object.isRequired
+}
 
 export default LoginButton
