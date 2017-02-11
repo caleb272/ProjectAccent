@@ -3,37 +3,37 @@ import callApi from '../../util/apiCaller'
 export const SETCOMMENTS = 'SETCOMMENTS'
 export const ADDCOMMENT = 'ADDCOMMENT'
 
-export function getCommentsRequest(websiteURL) {
+export function getCommentsRequest(websiteURL, userBasedSortAndFilter) {
   return function dispatchedRequest(dispatch) {
     return callApi('comments', 'PUT', { websiteURL })
-      .then(response => dispatch(setComments(response.data)))
+      .then(response => dispatch(setComments(response.data, userBasedSortAndFilter)))
       .catch(console.error)
   }
 }
 
 
-export function commentOnURLRequest(comment, websiteURL, parentID) {
+export function commentOnURLRequest(comment, websiteURL, parentID, userBasedSortAndFilter) {
   return function dispatchedRequest(dispatch) {
     return callApi('comments', 'POST', { comment, websiteURL, parentID })
-      .then(result => {
-        console.log('your result: ', result.data)
-        dispatch(addComment(result.data))
-      })
+      .then(result => dispatch(addComment(result.data, userBasedSortAndFilter)))
+      .catch(console.error)
   }
 }
 
 
-export function addComment(comment) {
+export function addComment(comment, userBasedSortAndFilter) {
   return {
     type: ADDCOMMENT,
-    comment
+    comment,
+    userBasedSortAndFilter
   }
 }
 
 
-export function setComments(comments) {
+export function setComments(comments, userBasedSortAndFilter) {
   return {
     type: SETCOMMENTS,
-    comments
+    comments,
+    userBasedSortAndFilter
   }
 }

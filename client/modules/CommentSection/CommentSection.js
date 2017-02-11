@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { getCommentsRequest, commentOnURLRequest } from './CommentSectionActions'
 import { getComments } from './CommentSectionReducer'
+import { createUserBasedSortAndFilter } from '../User/UserReducer'
 import WebsiteInputBar from './components/WebsiteInputBar/WebsiteInputBar'
 import CommentInputBar from './components/CommentInputBar/CommentInputBar'
 import Comment from './components/Comment/Comment'
@@ -35,7 +35,7 @@ class CommentSection extends Component {
 
   onWebsiteFormSubmit(websiteLink) {
     this.setState({ websiteLink })
-    this.props.dispatch(getCommentsRequest(websiteLink))
+    this.props.dispatch(getCommentsRequest(websiteLink, this.props.createdUserBasedSortAndFilter))
     this.showCommentInput(true)
     this.props.history.push(`/form/${encodeURIComponent(websiteLink)}`)
   }
@@ -44,7 +44,7 @@ class CommentSection extends Component {
   onCommentFormSubmit(comment, parentID) {
     const url = this.state.websiteLink
     if (url && comment)
-      this.props.dispatch(commentOnURLRequest(comment, url, parentID))
+      this.props.dispatch(commentOnURLRequest(comment, url, parentID, this.props.createdUserBasedSortAndFilter))
   }
 
 
@@ -87,25 +87,25 @@ class CommentSection extends Component {
 const mapStateToProps = (store, props) => {
   return {
     comments: getComments(store),
-    link: (isValidURL(props.params.link) ? props.params.link : null)
+    link: (isValidURL(props.params.link) ? props.params.link : null),
+    createdUserBasedSortAndFilter: createUserBasedSortAndFilter(store.user)
   }
 }
 
 
 const mapDispatchToProps = (dispatch) => {
-  return { dispatch }
+  return {
+    dispatch
+  }
 }
 
 CommentSection.propTypes = {
   comments: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
+  createdUserBasedSortAndFilter: PropTypes.func,
   link: PropTypes.string
 }
-
-// CommentSection.need = [
-//   () => getCommentsRequest()
-// ]
 
 export default connect(
   mapStateToProps,

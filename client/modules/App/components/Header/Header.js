@@ -18,7 +18,7 @@ export function Header(props, context) {
             to="/"
             className="brand-logo left"
             onClick={home}
-          >ACCENT{devStatus}</a>
+          >EVERYWHERE.CHAT{devStatus}</a>
           {!context.router.isActive('login') && !props.user ? <LoginButton /> : null}
           {props.user ? <LoggedInNav logout={props.logout} /> : null}
         </div>

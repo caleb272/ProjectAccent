@@ -8,7 +8,9 @@ const userSchema = new Schema({
   facebookID: String,
   username: String,
   profileImage: String,
-  provider: String
+  provider: String,
+  sortingMethod: String,
+  hiddenCommentTags: Array
 })
 
 export default mongoose.model('User', userSchema)

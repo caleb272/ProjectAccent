@@ -5,14 +5,18 @@ import passport from 'passport'
 import TwitterStrategy from 'passport-twitter'
 import serverConfig from '../config'
 import User from '../models/user'
-import cuID from 'cuID'
+import cuid from 'cuid'
 
 const router = new Router()
 const authCallbackRouter = new Router()
 
 
-passport.serializeUser((user, done) => done(null, user))
-passport.deserializeUser((id, done) => done(null, id))
+passport.serializeUser((user, done) => done(null, user._id))
+passport.deserializeUser((id, done) => {
+  return User.findById(id)
+    .then(user => done(null, user))
+    .catch(err => console.error(err))
+})
 
 passport.use(new TwitterStrategy(
   {
@@ -39,10 +43,10 @@ function findUser({ ID: twitterID }) {
 }
 
 
-function createUser({ ID: twitterID, displayName: username, photos, provIDer }) {
-  const userID = cuID()
+function createUser({ id: twitterID, displayName: username, photos, provider }) {
+  const userID = cuid()
   const profileImage = photos[0].value
-  return new User({ userID, twitterID, username, profileImage, provIDer }).save()
+  return new User({ userID, twitterID, username, profileImage, provider }).save()
 }
 
 router.use(passport.initialize())

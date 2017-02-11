@@ -20,6 +20,7 @@ if (process.env.NODE_ENV !== 'production') {
   require('./modules/Post/pages/PostDetailPage/PostDetailPage')
   require('./modules/CommentSection/CommentSection')
   require('./modules/Notification/Notification')
+  require('./modules/User/pages/Settings/Settings')
   require('./components/LoginPage/LoginPage')
   require('./components/AboutPage/AboutPage')
 }
@@ -50,6 +51,14 @@ export default (
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
           cb(null, require('./modules/Notification/Notification').default)
+        })
+      }}
+    />
+    <Route
+      path="/settings"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/User/pages/Settings/Settings').default)
         })
       }}
     />
