@@ -1,15 +1,22 @@
-// Import Actions
 import { SETCOMMENTS, ADDCOMMENT } from './CommentSectionActions'
 
-// Initial State
-const initialState = []
+const initialState = {
+  comments: [],
+  filters: []
+}
 
 const CommentSectionReducer = (state = initialState, action) => {
   switch (action.type) {
     case SETCOMMENTS:
-      return parseComments([...action.comments], action.userBasedSortAndFilter)
+      return {
+        ...state,
+        comments: parseComments([...action.comments], action.userBasedSortAndFilter)
+      }
     case ADDCOMMENT:
-      return parseComments([...state, action.comment], action.userBasedSortAndFilter)
+      return {
+        ...state,
+        comments: parseComments([...state.comments, action.comment], action.userBasedSortAndFilter)
+      }
     default:
       return state;
   }
@@ -30,8 +37,6 @@ function parseComments(newComments, userBasedSortAndFilter) {
 
 function addChildToParent(child, comments) {
   const parent = comments.find(i => i.cuid === child.parentID)
-  if (!parent)
-    console.log(child)
   if (!parent.hasOwnProperty('children'))
     parent.children = []
   parent.children.push(child)
@@ -39,7 +44,12 @@ function addChildToParent(child, comments) {
 
 
 export function getComments(state) {
-  return state.comments
+  return state.comments.comments
+}
+
+
+export function getFilters(state) {
+  return state.comments.filters
 }
 
 export default CommentSectionReducer

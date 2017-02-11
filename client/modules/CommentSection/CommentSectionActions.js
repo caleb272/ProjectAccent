@@ -12,6 +12,15 @@ export function getCommentsRequest(websiteURL, userBasedSortAndFilter) {
 }
 
 
+export function getFiltersRequest() {
+  return function dispatchedRequest(dispatch) {
+    callApi('filters')
+      .then(response => console.log('getFiltersRequest: ', response))
+      .catch(console.error)
+  }
+}
+
+
 export function commentOnURLRequest(comment, websiteURL, parentID, userBasedSortAndFilter) {
   return function dispatchedRequest(dispatch) {
     return callApi('comments', 'POST', { comment, websiteURL, parentID })

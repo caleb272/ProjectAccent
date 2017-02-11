@@ -1,14 +1,13 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { getCommentsRequest, commentOnURLRequest } from './CommentSectionActions'
-import { getComments } from './CommentSectionReducer'
+import { getCommentsRequest, getFiltersRequest, commentOnURLRequest } from './CommentSectionActions'
+import { getComments, getFilters } from './CommentSectionReducer'
 import { createUserBasedSortAndFilter } from '../User/UserReducer'
 import WebsiteInputBar from './components/WebsiteInputBar/WebsiteInputBar'
 import CommentInputBar from './components/CommentInputBar/CommentInputBar'
 import Comment from './components/Comment/Comment'
 import { isValidURL } from '../../util/URLTools'
 
-// Import Style for some reason this is fucking node over
 import styles from './CommentSection.css'
 
 class CommentSection extends Component {
@@ -28,6 +27,7 @@ class CommentSection extends Component {
 
 
   componentDidMount() {
+    this.props.dispatch(getFiltersRequest())
     if (this.state.websiteLink)
       this.onWebsiteFormSubmit(this.state.websiteLink)
   }
@@ -87,6 +87,7 @@ class CommentSection extends Component {
 const mapStateToProps = (store, props) => {
   return {
     comments: getComments(store),
+    filters: getFilters(store),
     link: (isValidURL(props.params.link) ? props.params.link : null),
     createdUserBasedSortAndFilter: createUserBasedSortAndFilter(store.user)
   }
