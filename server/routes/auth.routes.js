@@ -15,7 +15,10 @@ passport.serializeUser((user, done) => done(null, user._id))
 passport.deserializeUser((id, done) => {
   return User.findById(id)
     .then(user => done(null, user))
-    .catch(err => console.error(err))
+    .catch(err => {
+      done(err, null)
+      throw err
+    })
 })
 
 passport.use(new TwitterStrategy(
@@ -38,7 +41,8 @@ function findOrCreateUser(profile) {
 }
 
 
-function findUser({ ID: twitterID }) {
+function findUser({ id: twitterID }) {
+  console.log('twitterID', twitterID)
   return User.findOne({ twitterID })
 }
 

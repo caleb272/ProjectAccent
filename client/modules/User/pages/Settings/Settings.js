@@ -2,33 +2,23 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Col, Input, Row, Card, Chip } from 'react-materialize'
 import { bindActionCreators } from 'redux'
-import { requestGetUser, requestSetSortingMethod, sortingMethods } from '../../UserActions'
-import { getCurrentSortingMethod } from '../../UserReducer'
+import { requestGetUser, requestSetSortingMethod, requestSetUserFilters, sortingMethods } from '../../UserActions'
+import { getFiltersRequest } from '../../../CommentSection/CommentSectionActions'
+import { getFilters } from '../../../CommentSection/CommentSectionReducer'
+import { getUser, getCurrentSortingMethod } from '../../UserReducer'
 
 import styles from './Settings.css'
 
 class Settings extends Component {
   constructor(props) {
     super(props)
-
-    this.state = {
-      shown: [
-        'POLITICS',
-        'STARTUP',
-        'EXPLICIT LANGUAGE'
-      ],
-      hidden: [
-        '18+',
-        'INAPPRORRIATE'
-      ]
-    }
-
     this.onSortingChange = this.onSortingChange.bind(this)
   }
 
 
   componentDidMount() {
     this.props.requestGetUser()
+    this.props.requestGetFilters()
   }
 
 
@@ -38,24 +28,18 @@ class Settings extends Component {
 
 
   onTagClicked(tag) {
-    let shown
-    let hidden
-
-    if (this.state.hidden.indexOf(tag) === -1) {
-      shown = this.state.shown.filter(t => t !== tag)
-      hidden = [...this.state.hidden, tag]
-    } else {
-      hidden = this.state.hidden.filter(t => t !== tag)
-      shown = [...this.state.shown, tag]
-    }
-    this.setState({ shown })
-    this.setState({ hidden })
+    let userFilters = this.props.user.filters
+    if (userFilters.indexOf(tag) === -1)
+      userFilters = [...userFilters, tag]
+    else
+      userFilters = userFilters.filter(t => t !== tag)
+    this.props.requestSetUserFilters(userFilters)
   }
 
 
   render() {
     return (
-      <div className={`container ${styles.settings}`}>
+      <div className={styles.settings}>
         <Row>
           <Col s={12}>
             <Input
@@ -80,7 +64,7 @@ class Settings extends Component {
                 className="cyan darken-4 black-text z-depth-0"
                 title="Shown"
               >
-                {this.state.shown.map(
+                {this.props.filters.map(
                   tag => <span onClick={this.onTagClicked.bind(this, tag)} key={tag}><Chip>{tag}</Chip></span>
                 )}
               </Card>
@@ -88,7 +72,7 @@ class Settings extends Component {
                 className="red darken-3 black-text z-depth-0"
                 title="Hidden"
               >
-                {this.state.hidden.map(
+                {this.props.user.filters.map(
                   tag => <span onClick={this.onTagClicked.bind(this, tag)} key={tag}><Chip>{tag}</Chip></span>
                 )}
               </Card>
@@ -102,23 +86,34 @@ class Settings extends Component {
 
 
 function mapStateToProps(state) {
+  const user = getUser(state)
+  const userFilters = user.filters
+  const filters = getFilters(state).filter(cf => userFilters.indexOf(cf) === -1)
   return {
-    sortingMethod: getCurrentSortingMethod(state)
+    sortingMethod: getCurrentSortingMethod(state),
+    user,
+    filters
   }
 }
 
 
 function mapDispatchToProps(dispatch) {
   return {
+    requestGetUser: bindActionCreators(requestGetUser, dispatch),
+    requestGetFilters: bindActionCreators(getFiltersRequest, dispatch),
     requestSetSortingMethod: bindActionCreators(requestSetSortingMethod, dispatch),
-    requestGetUser: bindActionCreators(requestGetUser, dispatch)
+    requestSetUserFilters: bindActionCreators(requestSetUserFilters, dispatch)
   }
 }
 
 Settings.propTypes = {
   requestSetSortingMethod: PropTypes.func.isRequired,
   sortingMethod: PropTypes.string,
-  requestGetUser: PropTypes.func.isRequired
+  requestGetUser: PropTypes.func.isRequired,
+  requestGetFilters: PropTypes.func.isRequired,
+  requestSetUserFilters: PropTypes.func.isRequired,
+  filters: PropTypes.array.isRequired,
+  user: PropTypes.object
 }
 
 export default connect(

@@ -1,4 +1,4 @@
-import { SET_USER, LOGOUT, SET_SORTING_METHOD, sortingMethods, sortingMethodFunctions } from './UserActions'
+import { SET_USER, LOGOUT, SET_SORTING_METHOD, SET_USER_FILTERS, sortingMethods, sortingMethodFunctions } from './UserActions'
 
 const initialState = null
 
@@ -9,7 +9,15 @@ const UserReducer = (state = initialState, action) => {
     case LOGOUT:
       return null
     case SET_SORTING_METHOD:
-      return { ...state, sortingMethod: action.sortingMethod }
+      return {
+        ...state,
+        sortingMethod: action.sortingMethod
+      }
+    case SET_USER_FILTERS:
+      return {
+        ...state,
+        filters: action.filters
+      }
     default:
       return state
   }
@@ -43,6 +51,11 @@ export function sortByDate(comments, sortingMethodFunc) {
       comment.children = comment.children.sort(sortingMethodFunc)
     return sortingMethodFunc(comment, lastComment)
   })
+}
+
+
+export function getUser(state) {
+  return state.user
 }
 
 export default UserReducer

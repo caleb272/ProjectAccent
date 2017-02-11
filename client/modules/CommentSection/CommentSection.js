@@ -102,6 +102,7 @@ const mapDispatchToProps = (dispatch) => {
 
 CommentSection.propTypes = {
   comments: PropTypes.array.isRequired,
+  filters: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   createdUserBasedSortAndFilter: PropTypes.func,

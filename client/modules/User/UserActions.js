@@ -3,6 +3,7 @@ import callApi from '../../util/apiCaller'
 export const SET_USER = 'SET_USER'
 export const LOGOUT = 'LOGOUT'
 export const SET_SORTING_METHOD = 'SET_SORTING_METHOD'
+export const SET_USER_FILTERS = 'SET_USER_FILTERS'
 
 export const sortingMethodFunctions = {
   'Date: Newest To Oldest': (a, b) => (new Date(a.timestamp) < new Date(b.timestamp)),
@@ -17,6 +18,7 @@ export function requestGetUser() {
   return function dispatchedRequest(dispatch) {
     return callApi('user')
       .then(response => dispatch(setUser(response.data)))
+      .catch(console.error)
   }
 }
 
@@ -33,6 +35,14 @@ export function requestSetSortingMethod(sortingMethod) {
   return function dispatchedRequest(dispatch) {
     dispatch(setSortingMethod(sortingMethod))
     callApi('user/settings/sortingmethod', 'PUT', { sortingMethod })
+  }
+}
+
+
+export function requestSetUserFilters(filters) {
+  return function dispatchedRequest(dispatch) {
+    dispatch(setUsersFilters(filters))
+    callApi('user/settings/filters', 'PUT', { filters })
   }
 }
 
@@ -56,5 +66,13 @@ export function setSortingMethod(sortingMethod) {
   return {
     type: SET_SORTING_METHOD,
     sortingMethod
+  }
+}
+
+
+export function setUsersFilters(filters) {
+  return {
+    type: SET_USER_FILTERS,
+    filters
   }
 }

@@ -141,6 +141,11 @@ app.use((req, res, next) => {
 
     const store = configureStore()
 
+    store.dispatch({
+      type: 'SET_USER',
+      user: req.user
+    })
+
     return fetchComponentData(store, renderProps.components, renderProps.params)
       .then(() => {
         const initialView = renderToString(

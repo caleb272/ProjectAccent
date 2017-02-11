@@ -10,7 +10,7 @@ const userSchema = new Schema({
   profileImage: String,
   provider: String,
   sortingMethod: String,
-  hiddenCommentTags: Array
+  filters: Array
 })
 
 export default mongoose.model('User', userSchema)

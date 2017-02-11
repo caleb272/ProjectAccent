@@ -1,4 +1,4 @@
-import { SETCOMMENTS, ADDCOMMENT } from './CommentSectionActions'
+import { SET_COMMENTS, ADD_COMMENT, SET_FILTERS } from './CommentSectionActions'
 
 const initialState = {
   comments: [],
@@ -7,15 +7,20 @@ const initialState = {
 
 const CommentSectionReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SETCOMMENTS:
+    case SET_COMMENTS:
       return {
         ...state,
         comments: parseComments([...action.comments], action.userBasedSortAndFilter)
       }
-    case ADDCOMMENT:
+    case ADD_COMMENT:
       return {
         ...state,
         comments: parseComments([...state.comments, action.comment], action.userBasedSortAndFilter)
+      }
+    case SET_FILTERS:
+      return {
+        ...state,
+        filters: action.filters
       }
     default:
       return state;

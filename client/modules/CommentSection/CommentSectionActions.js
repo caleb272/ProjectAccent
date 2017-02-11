@@ -1,7 +1,8 @@
 import callApi from '../../util/apiCaller'
 
-export const SETCOMMENTS = 'SETCOMMENTS'
-export const ADDCOMMENT = 'ADDCOMMENT'
+export const SET_COMMENTS = 'SET_COMMENTS'
+export const ADD_COMMENT = 'ADD_COMMENT'
+export const SET_FILTERS = 'SET_FILTERS'
 
 export function getCommentsRequest(websiteURL, userBasedSortAndFilter) {
   return function dispatchedRequest(dispatch) {
@@ -14,8 +15,8 @@ export function getCommentsRequest(websiteURL, userBasedSortAndFilter) {
 
 export function getFiltersRequest() {
   return function dispatchedRequest(dispatch) {
-    callApi('filters')
-      .then(response => console.log('getFiltersRequest: ', response))
+    return callApi('filters')
+      .then(response => dispatch(setFilters(response.data)))
       .catch(console.error)
   }
 }
@@ -32,7 +33,7 @@ export function commentOnURLRequest(comment, websiteURL, parentID, userBasedSort
 
 export function addComment(comment, userBasedSortAndFilter) {
   return {
-    type: ADDCOMMENT,
+    type: ADD_COMMENT,
     comment,
     userBasedSortAndFilter
   }
@@ -41,8 +42,16 @@ export function addComment(comment, userBasedSortAndFilter) {
 
 export function setComments(comments, userBasedSortAndFilter) {
   return {
-    type: SETCOMMENTS,
+    type: SET_COMMENTS,
     comments,
     userBasedSortAndFilter
+  }
+}
+
+
+export function setFilters(filters) {
+  return {
+    type: SET_FILTERS,
+    filters
   }
 }
