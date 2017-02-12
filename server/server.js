@@ -35,6 +35,7 @@ import { fetchComponentData } from './util/fetchData'
 import auth from './routes/auth.routes'
 import api from './routes/api.routes'
 import posts from './routes/post.routes'
+import dummyData from './dummyData'
 import serverConfig from './config'
 
 import connectMongo from 'connect-mongo'
@@ -49,6 +50,7 @@ mongoose.connect(serverConfig.mongoURL, (error) => {
     console.error('Please make sure Mongodb is installed and running!') // eslint-disable-line no-console
     throw error
   }
+  dummyData()
 })
 
 const MongoStore = connectMongo(session)

@@ -1,0 +1,30 @@
+2017-02-11T22:25:58.685-0700 I CONTROL  [initandlisten] MongoDB starting : pid=17030 port=27018 dbpath=/Users/caleb/Documents/Programming/projects/ProjectAccent/node_modules/mockgoose/.mongooseTempDB/27018 64-bit host=Calebs-MacBook-Pro.local
+2017-02-11T22:25:58.686-0700 I CONTROL  [initandlisten] db version v3.2.10
+2017-02-11T22:25:58.686-0700 I CONTROL  [initandlisten] git version: 79d9b3ab5ce20f51c272b4411202710a082d0317
+2017-02-11T22:25:58.686-0700 I CONTROL  [initandlisten] allocator: system
+2017-02-11T22:25:58.686-0700 I CONTROL  [initandlisten] modules: none
+2017-02-11T22:25:58.686-0700 I CONTROL  [initandlisten] build environment:
+2017-02-11T22:25:58.686-0700 I CONTROL  [initandlisten]     distarch: x86_64
+2017-02-11T22:25:58.686-0700 I CONTROL  [initandlisten]     target_arch: x86_64
+2017-02-11T22:25:58.686-0700 I CONTROL  [initandlisten] options: { net: { bindIp: "127.0.0.1", port: 27018 }, processManagement: { fork: true }, storage: { dbPath: "/Users/caleb/Documents/Programming/projects/ProjectAccent/node_modules/mockgoose/.mongooseTempDB/27018", engine: "ephemeralForTest" }, systemLog: { destination: "file", path: "/Users/caleb/Documents/Programming/projects/ProjectAccent/mongodb-prebuilt-1486877158113.log" } }
+2017-02-11T22:25:58.697-0700 I CONTROL  [initandlisten] ** WARNING: You are running this process as the root user, which is not recommended.
+2017-02-11T22:25:58.697-0700 I CONTROL  [initandlisten] 
+2017-02-11T22:25:58.697-0700 I CONTROL  [initandlisten] 
+2017-02-11T22:25:58.697-0700 I CONTROL  [initandlisten] ** NOTE: The ephemeralForTest storage engine is for testing only. 
+2017-02-11T22:25:58.697-0700 I CONTROL  [initandlisten] **       Do not use in production.
+2017-02-11T22:25:58.697-0700 I CONTROL  [initandlisten] 
+2017-02-11T22:25:58.717-0700 I NETWORK  [HostnameCanonicalizationWorker] Starting hostname canonicalization worker
+2017-02-11T22:25:58.717-0700 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory '/Users/caleb/Documents/Programming/projects/ProjectAccent/node_modules/mockgoose/.mongooseTempDB/27018/diagnostic.data'
+2017-02-11T22:25:58.718-0700 I NETWORK  [initandlisten] waiting for connections on port 27018
+2017-02-11T22:25:58.773-0700 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:53373 #1 (1 connection now open)
+2017-02-11T22:25:59.274-0700 I CONTROL  [signalProcessingThread] got signal 15 (Terminated: 15), will terminate after current cmd ends
+2017-02-11T22:25:59.274-0700 I FTDC     [initandlisten] Shutting down full-time diagnostic data capture
+2017-02-11T22:25:59.276-0700 I CONTROL  [initandlisten] now exiting
+2017-02-11T22:25:59.276-0700 I NETWORK  [initandlisten] shutdown: going to close listening sockets...
+2017-02-11T22:25:59.276-0700 I NETWORK  [initandlisten] closing listening socket: 6
+2017-02-11T22:25:59.276-0700 I NETWORK  [initandlisten] closing listening socket: 7
+2017-02-11T22:25:59.276-0700 I NETWORK  [initandlisten] removing socket file: /tmp/mongodb-27018.sock
+2017-02-11T22:25:59.277-0700 I NETWORK  [initandlisten] shutdown: going to flush diaglog...
+2017-02-11T22:25:59.277-0700 I NETWORK  [initandlisten] shutdown: going to close sockets...
+2017-02-11T22:25:59.277-0700 I STORAGE  [initandlisten] shutdown: removing fs lock...
+2017-02-11T22:25:59.277-0700 I CONTROL  [initandlisten] dbexit:  rc: 0

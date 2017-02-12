@@ -1,7 +1,7 @@
 import callApi from '../../util/apiCaller'
 
-export const SET_COMMENTS = 'SET_COMMENTS'
 export const ADD_COMMENT = 'ADD_COMMENT'
+export const SET_COMMENTS = 'SET_COMMENTS'
 export const SET_FILTERS = 'SET_FILTERS'
 
 export function getCommentsRequest(websiteURL, userBasedSortAndFilter) {
