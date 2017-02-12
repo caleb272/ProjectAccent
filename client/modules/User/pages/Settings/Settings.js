@@ -113,7 +113,7 @@ Settings.propTypes = {
   requestGetFilters: PropTypes.func.isRequired,
   requestSetUserFilters: PropTypes.func.isRequired,
   filters: PropTypes.array.isRequired,
-  user: PropTypes.object
+  user: PropTypes.object.isRequired
 }
 
 export default connect(

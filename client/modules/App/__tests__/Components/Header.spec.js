@@ -1,67 +1,62 @@
-import React from 'react';
-import test from 'ava';
-import sinon from 'sinon';
-import { shallow } from 'enzyme';
-import { FormattedMessage } from 'react-intl';
-import { Header } from '../../components/Header/Header';
-import { intl } from '../../../../util/react-intl-test-helper';
+import React from 'react'
+import test from 'ava'
+import sinon from 'sinon'
+import { shallow } from 'enzyme'
+import { Header } from '../../components/Header/Header'
 
-test('just succed for this file to pass', t => {
-  t.truthy(true)
+test('renders the header properly when not logged in', t => {
+  const router = {
+    isActive: sinon.stub().returns(false),
+  }
+  const wrapper = shallow(
+    <Header logout={() => {}} />,
+    {
+      context: {
+        router
+      }
+    }
+  )
+
+  t.is(wrapper.find('LoggedInNav').length, 0)
+  t.is(wrapper.find('LoginButton').length, 1)
+  t.is(wrapper.find('a').length, 1)
 })
 
-// const intlProp = { ...intl, enabledLanguages: ['en', 'fr'] };
 
-// test('renders the header properly', t => {
-//   const router = {
-//     isActive: sinon.stub().returns(true),
-//   };
-//   const wrapper = shallow(
-//     <Header switchLanguage={() => {}} intl={intlProp} toggleAddPost={() => {}} />,
-//     {
-//       context: {
-//         router,
-//         intl,
-//       },
-//     }
-//   );
-//
-//   t.truthy(wrapper.find('Link').first().containsMatchingElement(<FormattedMessage id="siteTitle" />));
-//   t.is(wrapper.find('a').length, 1);
-// });
-//
-// test('doesn\'t add post in pages other than home', t => {
+test('renders the header properly when logged in', t => {
+  const router = {
+    isActive: sinon.stub().returns(false),
+  }
+  const wrapper = shallow(
+    <Header user={{}} logout={() => {}} />,
+    {
+      context: {
+        router
+      }
+    }
+  )
+
+  t.is(wrapper.find('LoginButton').length, 0)
+  t.is(wrapper.find('LoggedInNav').length, 1)
+  t.is(wrapper.find('a').length, 1, 'only has one link to home')
+})
+
+
+// test('logout called properly when logged in', t => {
 //   const router = {
 //     isActive: sinon.stub().returns(false),
-//   };
+//   }
+//
+//   const logout = sinon.spy()
 //   const wrapper = shallow(
-//     <Header switchLanguage={() => {}} intl={intlProp} toggleAddPost={() => {}} />,
+//     <Header user={{}} logout={logout} />,
 //     {
 //       context: {
-//         router,
-//         intl,
-//       },
+//         router
+//       }
 //     }
 //   );
 //
-//   t.is(wrapper.find('a').length, 0);
-// });
-//
-// test('toggleAddPost called properly', t => {
-//   const router = {
-//     isActive: sinon.stub().returns(true),
-//   };
-//   const toggleAddPost = sinon.spy();
-//   const wrapper = shallow(
-//     <Header switchLanguage={() => {}} intl={intlProp} toggleAddPost={toggleAddPost} />,
-//     {
-//       context: {
-//         router,
-//         intl,
-//       },
-//     }
-//   );
-//
-//   wrapper.find('a').first().simulate('click');
-//   t.truthy(toggleAddPost.calledOnce);
+//   wrapper.find('a').first().simulate('click')
+//   t.truthy(logout.calledOnce)
 // })

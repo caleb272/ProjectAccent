@@ -5,9 +5,8 @@ import { Footer } from '../../components/Footer/Footer';
 
 test('renders the footer properly', t => {
   const wrapper = shallow(
-    <Footer />
-  );
+    <Footer currentPathname={"/form"} />
+  )
 
-  t.is(wrapper.find('p').length, 2);
-  t.is(wrapper.find('p').first().text(), '© 2016 · Hashnode · LinearBytes Inc.');
-});
+  t.is(wrapper.find('p').first().text(), '© 2017 · Caleb Martin')
+})

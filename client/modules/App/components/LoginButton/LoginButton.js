@@ -14,8 +14,8 @@ function LoginButton(props, context) {
   )
 }
 
-LoginButton.contextTypes = {
-  router: React.PropTypes.object.isRequired
-}
+// LoginButton.contextTypes = {
+//   router: React.PropTypes.object.isRequired
+// }
 
 export default LoginButton

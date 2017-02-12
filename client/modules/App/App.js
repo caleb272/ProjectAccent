@@ -2,11 +2,10 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { requestGetUser, requestLogout } from '../User/UserActions'
+import { getUser } from '../User/UserReducer'
 
-// Import Style
 import styles from './App.css'
 
-// Import Components
 import Helmet from 'react-helmet'
 import DevTools from './components/DevTools'
 import Header from './components/Header/Header'
@@ -91,7 +90,7 @@ App.contextTypes = {
 function mapStateToProps(store, context) {
   return {
     currentPathname: context.location.pathname,
-    user: store.user
+    user: getUser(store)
   }
 }
 
