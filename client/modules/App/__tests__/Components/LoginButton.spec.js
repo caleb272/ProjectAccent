@@ -1,14 +1,19 @@
 import React from 'react'
 import test from 'ava'
-import { mount } from 'enzyme'
+import sinon from 'sinon'
+import { shallow } from 'enzyme'
 import { LoginButton } from '../../components/LoginButton/LoginButton'
 
 test('login called properly when the button is clicked', t => {
-  const wrapper = mount(
+  const replace = sinon.stub()
+  const wrapper = shallow(
     <LoginButton />,
-    { context: { router: {} } }
+    {
+      context: { router: { replace } },
+    }
   )
 
-  wrapper.find('a').simulate('click')
-  t.truthy(context.router.replace.calledOnce)
+  t.is(wrapper.find('a').length, 1)
+  wrapper.find('a').first().simulate('click')
+  t.truthy(replace.calledOnce)
 })

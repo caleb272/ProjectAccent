@@ -40,23 +40,3 @@ test('renders the header properly when logged in', t => {
   t.is(wrapper.find('LoggedInNav').length, 1)
   t.is(wrapper.find('a').length, 1, 'only has one link to home')
 })
-
-
-// test('logout called properly when logged in', t => {
-//   const router = {
-//     isActive: sinon.stub().returns(false),
-//   }
-//
-//   const logout = sinon.spy()
-//   const wrapper = shallow(
-//     <Header user={{}} logout={logout} />,
-//     {
-//       context: {
-//         router
-//       }
-//     }
-//   );
-//
-//   wrapper.find('a').first().simulate('click')
-//   t.truthy(logout.calledOnce)
-// })

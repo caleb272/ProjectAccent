@@ -1,6 +1,6 @@
 import React from 'react'
 
-function LoginButton(props, context) {
+export function LoginButton(props, context) {
   const login = () => context.router.replace('/login')
 
   return (
@@ -14,8 +14,8 @@ function LoginButton(props, context) {
   )
 }
 
-// LoginButton.contextTypes = {
-//   router: React.PropTypes.object.isRequired
-// }
+LoginButton.contextTypes = {
+  router: React.PropTypes.object.isRequired
+}
 
 export default LoginButton
